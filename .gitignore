@@ -25,3 +25,11 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#databases
+*.sqlite
+
+#IDEs
+.project
+.pydevproject
+.settings
