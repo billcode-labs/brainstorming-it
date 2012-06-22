@@ -4,17 +4,29 @@
 
 {% block corpo %}
 
-	<h1>Select a project</h1>
+	<div class="hero-unit">
+        <h1>Let's brainstorming your idea!</h1>
+        <p>This is a place to write down every idea and vote before figure out the best one.</p>
+    </div>
+
+	<h1>Select one project:</h1>
 	
-	<h2>Project{{object_list|pluralize}} ({{object_list|length}})</h2>
-	
-	<table>
+	<ul class="nav nav-pills nav-stacked">
 		{% for project in object_list %}
-		<tr>
-			<td>{{project.id}}</td>
-			<td>{{project.name}}</td>
-		</tr>
+		<li>
+			<a href="#{{project.id}}">{{project.name}}</a>
+		</li>
 		{% endfor %}
-	</table>	
+    </ul>
 
 {% endblock corpo %}
+{% block javascript %}
+
+	<script type="text/javascript">
+		(function($) {
+		    $(document).ready(function(){
+		    });
+		})(django.jQuery)
+	</script>
+
+{% endblock javascript %}

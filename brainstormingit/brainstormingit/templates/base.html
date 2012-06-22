@@ -4,18 +4,63 @@
 <html>
 
 	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="author" content="Roger.Camargo">
 		{% block cabecalho %}
-		<title>Brainstorming-it</title>
+			<title>Brainstorming-it</title>
 		{% endblock %}
-		<link rel="stylesheet" type="text/css" href="{% static "css/basico.css"%}" />
+		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css"%}" />
+		<!--
+		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-responsive.css"%}" >
+		-->
 	</head>
 	
 	<body>
-	
-		{% block corpo %}
-		<!-- body -->
+		
+		<div class="navbar navbar-fixed-top">
+	      <div class="navbar-inner">
+	        <div class="container">
+	          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </a>
+	          <a class="brand" href="#">Brainstorming it</a>
+	          <div class="nav-collapse">
+	            <ul class="nav">
+	              <li class="active"><a href="#">Home</a></li>
+	              <li><a href="admin">Admin</a></li>
+	              <li><a href="#about">About</a></li>
+	            </ul>
+	          </div><!--/.nav-collapse -->
+	        </div>
+	      </div>
+	    </div>	
+		<br />
+		
+		<div class="container">
+			{% block corpo %}
+			<!-- body -->
+			{% endblock %}
+			
+			<hr>	
+
+		    <footer>
+		    	<p>&copy; Billcode - 2012</p>
+		    </footer>			
+		
+		</div>
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="/static/admin/js/jquery.js"></script>
+		<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>		
+		<script src="{% static "js/bootstrap.min.js"%}"></script>
+		
+		{% block javascript %}
+		<!--  extra javascript-->		
 		{% endblock %}
-	
+		
 	</body>
 
 </html>
