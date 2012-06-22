@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block chamada %}Projetos{% endblock %}
+
+{% block corpo %}
+
+	<h1>Select a project</h1>
+	
+	<h2>Project{{object_list|pluralize}} ({{object_list|length}})</h2>
+	
+	<table>
+		{% for project in object_list %}
+		<tr>
+			<td>{{project.id}}</td>
+			<td>{{project.name}}</td>
+		</tr>
+		{% endfor %}
+	</table>	
+
+{% endblock corpo %}
