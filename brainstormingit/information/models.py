@@ -15,6 +15,10 @@ class Problem(models.Model):
 
     class Meta:
         ordering = ['priority']
+        
+    #def requirements(self):
+    #    return Requirement.objects.filter(problem=self).order_by('-priority')
+
     
     def __unicode__(self):
         return self.name
@@ -30,7 +34,7 @@ class Requirement(models.Model):
 
     class Meta:
         ordering = ['priority']
-
+        
     def __unicode__(self):
         return self.name
 
@@ -42,7 +46,7 @@ class Solution(models.Model):
     description = models.TextField()
     
     class Meta:
-        ordering = ['votes']
+        ordering = ['-votes']
 
     def __unicode__(self):
         return self.name
@@ -50,7 +54,7 @@ class Solution(models.Model):
 class Attachment(models.Model):
     solution = models.ForeignKey(Solution)    #Many Attachment has One Solution
     name = models.CharField(max_length=32)
-    attachment = models.FileField(upload_to='uploads')
+    attachment = models.FileField(upload_to='brainstormingit/static/uploads')
 
     def __unicode__(self):
         return self.name

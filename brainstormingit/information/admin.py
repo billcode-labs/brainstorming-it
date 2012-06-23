@@ -19,7 +19,21 @@ class ProblemAdmin(admin.ModelAdmin):
     ]
     list_display = ('name', 'priority')
     list_filter = ('project',)
+
+
+class AttachmentInline(admin.TabularInline):
+    model = Attachment
+
+class SolutionAdmin(admin.ModelAdmin):
+    inlines = [
+        AttachmentInline,
+    ]
+    list_display = ('name', 'votes')
+    list_filter = ('problem',)
+
+
     
 
 admin.site.register(Project)
 admin.site.register(Problem, ProblemAdmin)
+admin.site.register(Solution, SolutionAdmin)
