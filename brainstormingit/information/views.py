@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404 
 
 from .models import Project
 
@@ -9,4 +9,10 @@ from django.views.generic.list import ListView
 
 class ProjectsListView(ListView):
     model = Project
-    template_name='information/projects.html'
+    template_name='information/project_list.html'
+
+
+def project_detail(request, id):
+    project = get_object_or_404(Project, pk=id)
+    
+    return render(request, 'information/project_detail.html', {'project': project})    
