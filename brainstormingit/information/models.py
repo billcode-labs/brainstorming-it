@@ -54,8 +54,13 @@ class Solution(models.Model):
 class Attachment(models.Model):
     solution = models.ForeignKey(Solution)    #Many Attachment has One Solution
     name = models.CharField(max_length=32)
-    attachment = models.FileField(upload_to='brainstormingit/static/uploads')
+    attachment = models.FileField(upload_to='uploads')
 
+    def filename(self):
+        filename = '' + str(self.attachment)
+        print filename
+        return filename
+        
     def __unicode__(self):
         return self.name
 
