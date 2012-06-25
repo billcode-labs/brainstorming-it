@@ -15,11 +15,11 @@
             <div class="carousel-inner">
             	
             	{% for attachment in solution.attachment_set.all %}
-              	  <div class="item">
+              	  <div class="item {% if forloop.counter == 1 %}active{% endif %}">
               	  	    <img src="{% static attachment.filename %}" alt="">
 		                <div class="carousel-caption">
 		                  <h4>{{attachment.name}}</h4>
-		                  <p>{{attachment.attachment}}</p>
+		                  <p>{{attachment.description}}</p>
 		                </div>
 		          </div>
               	{% endfor %}
@@ -37,14 +37,13 @@
       </div><!--/row-->    
 
 {% endblock corpo %}
+
 {% block javascript %}
 
 		<script type="text/javascript">
-			(function($) {
-			    $(document).ready(function(){
+		    $(document).ready(function(){
 					$('.myCarousel').carousel();
-			    });
-			})(django.jQuery)
+		    });
 		</script>
 
 {% endblock javascript %}
