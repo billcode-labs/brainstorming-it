@@ -33,3 +33,7 @@ pip-log.txt
 .project
 .pydevproject
 .settings
+
+#Outros
+uploads/
+passos.*
