@@ -9,24 +9,22 @@
         <p>This is a place to write down every idea and vote before figure out the best one.</p>
     </div>
 
-	<h1>Select one project:</h1>
-	
-	<ul class="nav nav-pills nav-stacked">
-		{% for project in object_list %}
-		<li>
-			<a href="{% url url_project_detail project.id %}">{{project.name}}</a>
-		</li>
-		{% endfor %}
-    </ul>
+	<h2>Select one:</h2>
+	<div class="btn-group">
+    	  <button class="btn btn-inverse">Project</button>
+    	  <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+    		<span class="caret"></span>
+    	  </button>
+          <ul class="dropdown-menu">
+			{% for project in object_list %}
+			<li>
+				<a href="{% url url_project_detail project.id %}">{{project.name}}</a>
+			</li>
+			{% endfor %}
+          </ul>
+    </div><!-- /btn-group -->  
 
 {% endblock corpo %}
+
 {% block javascript %}
-
-	<script type="text/javascript">
-		(function($) {
-		    $(document).ready(function(){
-		    });
-		})(django.jQuery)
-	</script>
-
 {% endblock javascript %}
