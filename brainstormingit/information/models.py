@@ -55,7 +55,7 @@ class Attachment(models.Model):
     solution = models.ForeignKey(Solution)    #Many Attachment has One Solution
     name = models.CharField(max_length=32)
     description = models.TextField(blank=True)
-    file = models.FileField(upload_to='uploads')
+    file = models.FileField(upload_to='attachment')
 
     def filename(self):
         return str(self.file)

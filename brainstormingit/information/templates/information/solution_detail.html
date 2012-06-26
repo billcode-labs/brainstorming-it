@@ -15,8 +15,8 @@
             <div class="carousel-inner">
             	
             	{% for attachment in solution.attachment_set.all %}
-              	  <div class="item {% if forloop.counter == 1 %}active{% endif %}">
-              	  	    <img src="{% static attachment.filename %}" alt="">
+              	  <div class="item {% if forloop.counter == 1 %}active{% endif %}" align="center">
+              	  	    <img src="{{ MEDIA_URL }}{{ attachment.filename }}" alt="" />
 		                <div class="carousel-caption">
 		                  <h4>{{attachment.name}}</h4>
 		                  <p>{{attachment.description}}</p>
@@ -42,7 +42,7 @@
 
 		<script type="text/javascript">
 		    $(document).ready(function(){
-					$('.myCarousel').carousel();
+					$('#myCarousel').carousel();
 		    });
 		</script>
 
