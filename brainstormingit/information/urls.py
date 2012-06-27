@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from .views import ProjectsListView, project_detail, solution_detail
+from .views import ProjectsListView, project_detail, solution_detail, register_problem
 
 urlpatterns = patterns('information.views',
     
@@ -9,5 +9,8 @@ urlpatterns = patterns('information.views',
     url(r'^projects/(\d+)', project_detail, name='url_project_detail'),
     
     url(r'^projects', ProjectsListView.as_view(), name='url_project_list'),
+    
+    url(r'^problem/new/(\d+)', register_problem, name='url_register_problem'),
+    
     
 )
