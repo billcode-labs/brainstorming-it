@@ -9,7 +9,7 @@ from django import forms
 from django.views.generic.list import ListView
 from django.template import RequestContext
 
-from .models import Project, Solution, Problem
+from .models import Project, Solution, Problem, Requirement
 
 class ProjectsListView(ListView):
     model = Project
@@ -34,6 +34,28 @@ def register_problem(request, id_project):
     return HttpResponseRedirect('/projects/' + str(id_project))
 
 
-class ProblemForm(forms.ModelForm):
+def register_requirement(request, id_project):
+    problem_id = request.POST.get('problem_id_input', None)
+    requirement_name = request.POST.get('requirement_name_input', None)
+    
+    if problem_id and requirement_name:
+        project = get_object_or_404(Project, pk=id_project)
+        problem = get_object_or_404(Problem, pk=problem_id)
+    
+        new_requirement = Requirement(problem=problem, name=requirement_name)
+        print 'new requirement:', new_requirement
+        form = RequirementForm(instance=new_requirement)
+        
+    else:    
+        form = RequirementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/projects/' + str(id_project))
+            
+    payload = {'form':form, 'id_project': id_project }
+    return render(request, 'information/register_requirement.html', payload) 
+
+class RequirementForm(forms.ModelForm):
     class Meta:
-        model = Problem    
+        model = Requirement
+            

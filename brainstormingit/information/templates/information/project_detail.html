@@ -10,7 +10,10 @@
         <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
-              <li class="nav-header">Problem's List<span><a id="new_problem_btn" class="btn btn-small" href="#"><i class="icon-plus"></i></a></span></li>
+              <li class="nav-header">Problem's List
+              	<span><a id="new_problem_btn" class="btn btn-small" href="#"><i class="icon-plus"></i></a></span>
+              	<span><a id="setup_problem_btn" class="btn btn-small" href="/admin/information/problem/?project__id__exact={{project.id}}"><i class="icon-cog"></i></a></span>
+              </li>
               <li class="divider"></li>
               {% for problem in project.problem_set.all %}
               <li id="{{problem.id}}" class="problem_li"><a href="#">{{problem.name}} ({{problem.priority}})</a></li>
@@ -45,6 +48,16 @@
               	  {% endfor %}
               </div>
               {% endfor %}
+              <div>
+					<form action="{% url url_register_requirement id_project %}" method="post" id="add_requirement_form">
+					   {% csrf_token %}
+		               <div class="input-append">
+		               	<input type="hidden" name="problem_id_input" id="problem_id_input" value="" />
+	                	<input type="text" name="requirement_name_input" class="span8" size="32" >
+	                	<input type="submit" name="submit" value="Add" class="btn" />
+		               </div>
+					</form>
+              </div>
             </div><!--/span6-->
             
             
@@ -83,6 +96,7 @@
 						$(".problem_div").hide();
 						$(".requirement_div" + problem_id_selected).show();
 						$(".solution_div" + problem_id_selected).show();
+						$("#problem_id_input").val(problem_id_selected);
 					});
 					//novo problema
 					$("#add_problem_div").hide();

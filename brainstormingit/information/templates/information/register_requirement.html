@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block chamada %}Projetos{% endblock %}
+
+{% block corpo %}
+
+	<div class="row-fluid">
+        <div class="span12">
+        	
+			<form action="" method="post"> {% csrf_token %}
+				<div class="modal-header">
+	                <h3>New Requirement</h3>
+	            </div>
+	            
+	            <div class="modal-body">{{ form }}</div>
+				    
+				<div class="modal-footer">
+					
+					<a href="{% url url_project_detail id_project %}" class="btn">Cancel</a>
+					<input type="submit" name="submit" class="btn btn-primary" value="Save changes" />
+	            </div>				
+			</form>
+        	
+        </div><!--/span3-->
+        
+      </div><!--/row-->    
+
+{% endblock corpo %}
+{% block javascript %}
+
+		<script type="text/javascript">
+		    $(document).ready(function(){
+		    	$('#id_project').attr('readonly', 'readonly');
+		    });
+		</script>
+
+{% endblock javascript %}
