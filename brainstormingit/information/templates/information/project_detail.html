@@ -80,6 +80,16 @@
               	  {% endfor %}
               </div>
               {% endfor %}
+              <div>
+					<form action="{% url url_register_solution id_project %}" method="post" id="add_solution_form">
+					   {% csrf_token %}
+		               <div class="input-append">
+		               	<input type="hidden" name="problem_id_input" id="problem_id_input2" value="" />
+	                	<input type="text" name="solution_name_input" class="span8" size="32" >
+	                	<input type="submit" name="submit" value="Add" class="btn" />
+		               </div>
+					</form>
+              </div>              
             </div><!--/span6-->
 
           </div><!--/row-->
@@ -96,13 +106,16 @@
 		    	    //habilitar e desabilitar itens conforme problema selecionado
 		    		$(".problem_div").hide();
 		    		$("#add_requirement_form").hide();
+		    		$("#add_solution_form").hide();
 					$(".problem_li").click(function(event){
 						var problem_id_selected = $(this).attr('id');
 						$(".problem_div").hide();
 						$(".requirement_div" + problem_id_selected).show();
 						$(".solution_div" + problem_id_selected).show();
 						$("#problem_id_input").val(problem_id_selected);
+						$("#problem_id_input2").val(problem_id_selected);
 						$("#add_requirement_form").show();
+						$("#add_solution_form").show();
 					});
 					//novo problema
 					$("#add_problem_div").hide();

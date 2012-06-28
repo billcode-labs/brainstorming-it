@@ -53,9 +53,34 @@ def register_requirement(request, id_project):
             return HttpResponseRedirect('/projects/' + str(id_project))
             
     payload = {'form':form, 'id_project': id_project }
-    return render(request, 'information/register_requirement.html', payload) 
+    return render(request, 'information/register_requirement.html', payload)
 
 class RequirementForm(forms.ModelForm):
     class Meta:
         model = Requirement
+
+
+def register_solution(request, id_project):
+    problem_id = request.POST.get('problem_id_input', None)
+    solution_name = request.POST.get('solution_name_input', None)
+    
+    if problem_id and solution_name:
+        project = get_object_or_404(Project, pk=id_project)
+        problem = get_object_or_404(Problem, pk=problem_id)
+    
+        new_solution = Solution(problem=problem, name=solution_name)
+        form = SolutionForm(instance=new_solution)
+        
+    else:    
+        form = SolutionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/projects/' + str(id_project))
+            
+    payload = {'form':form, 'id_project': id_project }
+    return render(request, 'information/register_solution.html', payload) 
+ 
+class SolutionForm(forms.ModelForm):
+    class Meta:
+        model = Solution
             
