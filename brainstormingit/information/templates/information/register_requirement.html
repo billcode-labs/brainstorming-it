@@ -4,26 +4,77 @@
 
 {% block corpo %}
 
-	<div class="row-fluid">
-        <div class="span12">
-        	
-			<form action="" method="post"> {% csrf_token %}
-				<div class="modal-header">
-	                <h3>New Requirement</h3>
-	            </div>
-	            
-	            <div class="modal-body">{{ form }}</div>
-				    
-				<div class="modal-footer">
-					
-					<a href="{% url url_project_detail id_project %}" class="btn">Cancel</a>
-					<input type="submit" name="submit" class="btn btn-primary" value="Save changes" />
-	            </div>				
-			</form>
-        	
-        </div><!--/span3-->
-        
-      </div><!--/row-->    
+<section id="global">
+	
+	<div class="page-header">
+    	<h2>New Requirement</h2>
+	</div>
+	<form action="" method="post"> {% csrf_token %}
+		
+		<input type="hidden" name="id_project" value="{{id_project}}" />
+		
+		
+	<div class="row">
+		
+       <div class="span12">
+	   	  <p>
+		   	  	<table>
+		   	  		<tr>
+						<th><label for="id_problem">Problem:</label></th>
+						<td>{{ form.problem }}</td>
+						<th></th>
+						<td></td>
+			   	  	</tr>
+			   	  	<tr>
+							<th><label for="id_name">Name:</label></th>
+							<td>{{ form.name }}</td>
+							<th><label for="id_priority">Priority:</label></th><td>{{ form.priority }}</td>	   	  			
+		   	  		</tr>
+		   	  	</table>
+	   	  </p>
+			   
+		  <div class="tabbable" style="margin-bottom: 18px;">
+						        <ul class="nav nav-tabs">
+						          <li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
+						          <li><a href="#tab2" data-toggle="tab">Story</a></li>
+						        </ul>
+						        <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+						          <div class="tab-pane active" id="tab1">
+						            <p>
+						            	<th><label for="id_description">Description:</label><td>{{ form.description }}</td>
+						            </p>
+						          </div>
+						          <div class="tab-pane" id="tab2">
+						            <p>
+						            	<table>
+						            		<tr>
+												<th><label for="id_user">As a:</label></th><td>{{ form.user }}</td>
+												<th></th><td></td>
+						            		</tr>
+						            		<tr>
+												<th><label for="id_action">I want to:</label></th><td>{{ form.action }}</td>
+												<th><label for="id_detail">So that:</label></th><td>{{ form.detail }}</td>
+						            		</tr>
+						            	</table>
+						            </p>
+						          </div>
+						        </div>		   
+		  </div>
+						    
+			<a href="{% url url_project_detail id_project %}" class="btn">Cancel</a>
+			<input type="submit" name="submit" class="btn btn-primary" value="Save changes" />
+			            		
+			            		
+		</div>		
+		
+		
+		
+	</div>
+	
+	</form>
+	
+</section>	
+
 
 {% endblock corpo %}
 {% block javascript %}

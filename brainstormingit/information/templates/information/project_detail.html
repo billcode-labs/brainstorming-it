@@ -43,7 +43,11 @@
               	  {% for requirement in problem.requirement_set.all %}
               	  <div class="alert alert-block" id="{{requirement.id}}" >
               	  	  <h4 class="alert-heading">#{{problem.id}} - {{requirement.name}} ({{requirement.priority}})</h4>
-              	  	  <b>As a </b>{{requirement.user}}, <b>I want to</b> {{requirement.action}}. <b>So that</b> {{requirement.detail}}
+              	  	  {% if requirement.user %}
+              	  	  	<b>As a </b>{{requirement.user}}, <b>I want to</b> {{requirement.action}}. <b>So that</b> {{requirement.detail}}
+              	  	  {% else %}
+              	  	  	{{requirement.description}}
+              	  	  {% endif %}
 		          </div>
               	  {% endfor %}
               </div>
@@ -91,12 +95,14 @@
 		    $(document).ready(function(){
 		    	    //habilitar e desabilitar itens conforme problema selecionado
 		    		$(".problem_div").hide();
+		    		$("#add_requirement_form").hide();
 					$(".problem_li").click(function(event){
 						var problem_id_selected = $(this).attr('id');
 						$(".problem_div").hide();
 						$(".requirement_div" + problem_id_selected).show();
 						$(".solution_div" + problem_id_selected).show();
 						$("#problem_id_input").val(problem_id_selected);
+						$("#add_requirement_form").show();
 					});
 					//novo problema
 					$("#add_problem_div").hide();
