@@ -17,7 +17,7 @@ class ProblemAdmin(admin.ModelAdmin):
     #    RequirementInline,
     #    SolutionInline,
     #]
-    list_display = ('name', 'priority')
+    list_display = ('name', 'vote')
     list_filter = ('project',)
 
 
@@ -28,7 +28,7 @@ class SolutionAdmin(admin.ModelAdmin):
     inlines = [
         AttachmentInline,
     ]
-    list_display = ('name', 'votes')
+    list_display = ('name', 'like', 'unlike')
     list_filter = ('problem',)
 
 

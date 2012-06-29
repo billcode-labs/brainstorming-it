@@ -11,13 +11,10 @@ class Project(models.Model):
 class Problem(models.Model):
     project = models.ForeignKey(Project)
     name = models.CharField(max_length=32)
-    priority = models.IntegerField(default=1)
+    vote = models.IntegerField(default=0)
 
     class Meta:
-        ordering = ['priority']
-        
-    #def requirements(self):
-    #    return Requirement.objects.filter(problem=self).order_by('-priority')
+        ordering = ['-vote']
 
     
     def __unicode__(self):
@@ -25,15 +22,15 @@ class Problem(models.Model):
 
 class Requirement(models.Model):
     problem = models.ForeignKey(Problem)     #Many Requirements has One Problem
-    name = models.CharField(max_length=32)
-    priority = models.IntegerField(default=1)
+    name = models.CharField(max_length=64)
+    vote = models.IntegerField(default=0, blank=True)
     user = models.CharField(u'As a', max_length=32, blank=True)
     action = models.TextField(u'I want to', blank=True)
     detail = models.TextField(u'So that', blank=True)
     description = models.TextField(blank=True)
 
     class Meta:
-        ordering = ['priority']
+        ordering = ['-vote']
         
     def __unicode__(self):
         return self.name
@@ -41,12 +38,13 @@ class Requirement(models.Model):
 
 class Solution(models.Model):
     problem = models.ForeignKey(Problem)      #Many Solutions has One Problem
-    name = models.CharField(max_length=32)
-    votes = models.IntegerField(default=0)
-    description = models.TextField()
+    name = models.CharField(max_length=64)
+    like = models.IntegerField(default=0, blank=True)
+    unlike = models.IntegerField(default=0, blank=True)
+    description = models.TextField(blank=True)
     
     class Meta:
-        ordering = ['-votes']
+        ordering = ['-like']
 
     def __unicode__(self):
         return self.name

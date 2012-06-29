@@ -16,7 +16,7 @@
               </li>
               <li class="divider"></li>
               {% for problem in project.problem_set.all %}
-              <li id="{{problem.id}}" class="problem_li"><a href="#">{{problem.name}} ({{problem.priority}})</a></li>
+              <li id="{{problem.id}}" class="problem_li"><a href="#">{{problem.name}} ({{problem.vote}})</a></li>
               {% endfor %}
 			  <li>
 				<div class="controls" id="add_problem_div">
@@ -42,7 +42,7 @@
               <div class="problem_div requirement_div{{problem.id}}">
               	  {% for requirement in problem.requirement_set.all %}
               	  <div class="alert alert-block" id="{{requirement.id}}" >
-              	  	  <h4 class="alert-heading">#{{problem.id}} - {{requirement.name}} ({{requirement.priority}})</h4>
+              	  	  <h4 class="alert-heading">#{{problem.id}} - {{requirement.name}} ({{requirement.vote}})</h4>
               	  	  {% if requirement.user %}
               	  	  	<b>As a </b>{{requirement.user}}, <b>I want to</b> {{requirement.action}}. <b>So that</b> {{requirement.detail}}
               	  	  {% else %}
@@ -73,7 +73,7 @@
               <div class="problem_div solution_div{{problem.id}}">
               	  {% for solution in problem.solution_set.all %}
               	  <div class="alert alert-info" id="{{solution.id}}" >
-              	  	  <h4 class="alert-heading">#{{problem.id}} - {{solution.name}} ({{solution.votes}})</h4>
+              	  	  <h4 class="alert-heading">#{{problem.id}} - {{solution.name}} ({{solution.like}},{{solution.unlike}})</h4>
               	  	  {{solution.description}}
               	  	  <p>
               	  	  	<a class="btn-small" href="{% url url_solution_detail solution.id %}">Attachments &raquo;</a>

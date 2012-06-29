@@ -3,6 +3,7 @@
 from django.shortcuts import render, get_object_or_404 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.forms.widgets import HiddenInput
 
 from django import http
 from django import forms
@@ -43,8 +44,8 @@ def register_requirement(request, id_project):
         problem = get_object_or_404(Problem, pk=problem_id)
     
         new_requirement = Requirement(problem=problem, name=requirement_name)
-        print 'new requirement:', new_requirement
         form = RequirementForm(instance=new_requirement)
+        form.fields['vote'].widget = HiddenInput()
         
     else:    
         form = RequirementForm(request.POST)
@@ -70,6 +71,8 @@ def register_solution(request, id_project):
     
         new_solution = Solution(problem=problem, name=solution_name)
         form = SolutionForm(instance=new_solution)
+        form.fields['like'].widget = HiddenInput()
+        form.fields['unlike'].widget = HiddenInput()
         
     else:    
         form = SolutionForm(request.POST)
