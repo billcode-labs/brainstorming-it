@@ -75,7 +75,10 @@
               	  <div class="alert alert-info" id="{{solution.id}}" >
               	  	  <h4 class="alert-heading">#{{problem.id}} - {{solution.name}} ({{solution.votes}})</h4>
               	  	  {{solution.description}}
-              	  	  <p><a class="btn-small" href="{% url url_solution_detail solution.id %}">Attachments &raquo;</a></p>
+              	  	  <p>
+              	  	  	<a class="btn-small" href="{% url url_solution_detail solution.id %}">Attachments &raquo;</a>
+              	  	  	<a class="btn-small" href="{% url url_register_attachment solution.id %}">New &raquo;</a>
+              	  	  </p>
 		          </div>
               	  {% endfor %}
               </div>
