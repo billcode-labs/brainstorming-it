@@ -16,7 +16,7 @@
             	
             	{% for attachment in solution.attachment_set.all %}
               	  <div class="item {% if forloop.counter == 1 %}active{% endif %}" align="center">
-              	  	    <img src="{{ MEDIA_URL }}{{ attachment.filename }}" alt="" />
+              	  	    <img height="500" src="{{ MEDIA_URL }}{{ attachment.filename }}" alt="" />
 		                <div class="carousel-caption">
 		                  <h4>{{attachment.name}}</h4>
 		                  <p>{{attachment.description}}</p>

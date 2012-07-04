@@ -108,3 +108,16 @@ class AttachmentForm(forms.ModelForm):
     class Meta:
         model = Attachment
             
+            
+def problem_more_priority(request, id_problem):
+    problem = get_object_or_404(Problem, pk=id_problem)
+    problem.vote += 1
+    problem.save()
+    return project_detail(request, problem.project.id)
+
+def problem_less_priority(request, id_problem):
+    problem = get_object_or_404(Problem, pk=id_problem)
+    if problem.vote > 0:
+        problem.vote -= 1
+        problem.save()
+    return project_detail(request, problem.project.id)

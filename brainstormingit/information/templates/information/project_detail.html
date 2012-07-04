@@ -8,17 +8,39 @@
     
 	<div class="row-fluid">
         <div class="span3">
+          <!--	
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Problem's List
-              	<span><a id="new_problem_btn" class="btn btn-small" href="#"><i class="icon-plus"></i></a></span>
               	<span><a id="setup_problem_btn" class="btn btn-small" href="/admin/information/problem/?project__id__exact={{project.id}}"><i class="icon-cog"></i></a></span>
               </li>
               <li class="divider"></li>
+              
+             -->
               {% for problem in project.problem_set.all %}
-              <li id="{{problem.id}}" class="problem_li"><a href="#">{{problem.name}} ({{problem.vote}})</a></li>
+              <div id="div{{problem.id}}" class="well problem_li">
+              	<div class="row">
+              		<div class="span6">
+              			<div>
+	              			<span>
+	              			<a href="#">{{problem.name}} ({{problem.vote}})</a>
+	              			</span>		
+              				
+              			</div>
+              		</div>
+              		<div class="span3">
+              			<i class="icon-tint icon-white"></i>
+              		</div>
+              		<div class="span3" id="options_div{{problem.id}}">
+              			<i class="icon-download"></i><a href="{% url url_problem_more_priority problem.id %}">up</a>
+              			<i class="icon-upload"></i><a href="{% url url_problem_less_priority problem.id %}">down</a>
+              		</div>
+              	</div>
+              </div>
+              
               {% endfor %}
-			  <li>
+              <span><a id="new_problem_btn" class="btn btn-small" href="#">Add problem</a></span>
+			  
 				<div class="controls" id="add_problem_div">
 					<form action="{% url url_register_problem id_project %}" method="post" id="add_problem_form">
 					   {% csrf_token %}
@@ -28,10 +50,11 @@
 		               </div>
 					</form>
 	            </div>				
-			  </li>
+			  
               
-            </ul>
-          </div>
+            
+          
+          
         </div><!--/span3-->
         
         <div class="span9">
@@ -113,13 +136,24 @@
 					$(".problem_li").click(function(event){
 						var problem_id_selected = $(this).attr('id');
 						$(".problem_div").hide();
-						$(".requirement_div" + problem_id_selected).show();
-						$(".solution_div" + problem_id_selected).show();
+						$(".requirement_" + problem_id_selected).show();
+						$(".solution_" + problem_id_selected).show();
 						$("#problem_id_input").val(problem_id_selected);
 						$("#problem_id_input2").val(problem_id_selected);
 						$("#add_requirement_form").show();
 						$("#add_solution_form").show();
 					});
+					$("div[id^='options']").hide();
+					$(".problem_li").mouseenter(function(event){
+						var problem_id_selected = $(this).attr('id');
+						$("#options_" + problem_id_selected).show();
+					});
+					$(".problem_li").mouseleave(function(event){
+						var problem_id_selected = $(this).attr('id');
+						$("#options_" + problem_id_selected).hide();
+					});					
+
+					
 					//novo problema
 					$("#add_problem_div").hide();
 					$("#new_problem_btn").click(function(event){
