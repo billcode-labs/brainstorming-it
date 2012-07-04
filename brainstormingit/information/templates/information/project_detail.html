@@ -71,6 +71,11 @@
               	  	  {% else %}
               	  	  	{{requirement.description}}
               	  	  {% endif %}
+              	  	  <p>
+              	  	  	<i class="icon-upload"></i><a class="btn-small" href="{% url url_requirement_more_priority requirement.id %}">up</a>
+              	  	  	<i class="icon-download"></i><a class="btn-small" href="{% url url_requirement_less_priority requirement.id %}">down</a>
+              	  	  </p>
+              	  	  
 		          </div>
               	  {% endfor %}
               </div>
@@ -143,6 +148,8 @@
 						$("#add_requirement_form").show();
 						$("#add_solution_form").show();
 					});
+					
+					//habilita botoes up|down do problem (quando passa o mouse)
 					$("div[id^='options']").hide();
 					$(".problem_li").mouseenter(function(event){
 						var problem_id_selected = $(this).attr('id');

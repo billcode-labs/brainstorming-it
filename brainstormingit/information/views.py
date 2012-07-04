@@ -121,3 +121,16 @@ def problem_less_priority(request, id_problem):
         problem.vote -= 1
         problem.save()
     return project_detail(request, problem.project.id)
+
+def requirement_more_priority(request, id_requirement):
+    requirement = get_object_or_404(Requirement, pk=id_requirement)
+    requirement.vote += 1
+    requirement.save()
+    return project_detail(request, requirement.problem.project.id)
+
+def requirement_less_priority(request, id_requirement):
+    requirement = get_object_or_404(Requirement, pk=id_requirement)
+    if requirement.vote > 0:
+        requirement.vote -= 1
+        requirement.save()
+    return project_detail(request, requirement.problem.project.id)
