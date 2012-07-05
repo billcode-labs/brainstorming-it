@@ -4,7 +4,9 @@
 
 {% block corpo %}
 
-	<h2>{{project.name}}</h2>
+	<ul class="breadcrumb">
+    	<li>{{project.name}}</li>
+    </ul>
     
 	<div class="row-fluid">
         <div class="span3">
@@ -17,27 +19,16 @@
               <li class="divider"></li>
               
              -->
+             <h3>Problem's list</h3>
               {% for problem in project.problem_set.all %}
-              <div id="div{{problem.id}}" class="well problem_li">
-              	<div class="row">
-              		<div class="span6">
-              			<div>
-	              			<span>
-	              			<a href="#">{{problem.name}} ({{problem.vote}})</a>
-	              			</span>		
-              				
-              			</div>
-              		</div>
-              		<div class="span3">
-              			<i class="icon-tint icon-white"></i>
-              		</div>
-              		<div class="span3" id="options_div{{problem.id}}">
-              			<i class="icon-download"></i><a href="{% url url_problem_more_priority problem.id %}">up</a>
-              			<i class="icon-upload"></i><a href="{% url url_problem_less_priority problem.id %}">down</a>
-              		</div>
-              	</div>
-              </div>
-              
+           	  <div class="alert alert-info problem_item" id="div{{problem.id}}" >
+               	  <h4 class="alert-heading">#{{problem.id}} - {{problem.name}}</h4>
+              	  	  <p>
+              	  	  	<span class="badge badge-inverse">{{problem.vote}}</span>
+              	  	  	<i class="icon-upload"></i><a class="btn-small" href="{% url url_problem_more_priority problem.id %}">up</a>
+              	  	  	<i class="icon-download"></i><a class="btn-small" href="{% url url_problem_less_priority problem.id %}">down</a>
+             	  	  </p>
+	          </div>
               {% endfor %}
               <span><a id="new_problem_btn" class="btn btn-small" href="#">Add problem</a></span>
 			  
@@ -60,7 +51,7 @@
         <div class="span9">
           <div class="row-fluid">
             <div class="span6">
-              <h2>Requirement</h2>
+              <h3>Requirement</h3>
               {% for problem in project.problem_set.all %}
               <div class="problem_div requirement_div{{problem.id}}">
               	  {% for requirement in problem.requirement_set.all %}
@@ -97,11 +88,11 @@
             
             
             <div class="span6">
-              <h2>Solution</h2>
+              <h3>Solution</h3>
               {% for problem in project.problem_set.all %}
               <div class="problem_div solution_div{{problem.id}}">
               	  {% for solution in problem.solution_set.all %}
-              	  <div class="alert alert-info" id="{{solution.id}}" >
+              	  <div class="alert alert-success" id="{{solution.id}}" >
               	  	  <h4 class="alert-heading">#{{problem.id}} - {{solution.name}}</h4>
               	  	  {{solution.description}}
               	  	  <p>
@@ -143,7 +134,7 @@
 		    		$(".problem_div").hide();
 		    		$("#add_requirement_form").hide();
 		    		$("#add_solution_form").hide();
-					$(".problem_li").click(function(event){
+					$(".problem_item").click(function(event){
 						var problem_id_selected = $(this).attr('id');
 						$(".problem_div").hide();
 						$(".requirement_" + problem_id_selected).show();
@@ -153,18 +144,6 @@
 						$("#add_requirement_form").show();
 						$("#add_solution_form").show();
 					});
-					
-					//habilita botoes up|down do problem (quando passa o mouse)
-					$("div[id^='options']").hide();
-					$(".problem_li").mouseenter(function(event){
-						var problem_id_selected = $(this).attr('id');
-						$("#options_" + problem_id_selected).show();
-					});
-					$(".problem_li").mouseleave(function(event){
-						var problem_id_selected = $(this).attr('id');
-						$("#options_" + problem_id_selected).hide();
-					});					
-
 					
 					//novo problema
 					$("#add_problem_div").hide();
