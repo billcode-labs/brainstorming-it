@@ -65,13 +65,14 @@
               <div class="problem_div requirement_div{{problem.id}}">
               	  {% for requirement in problem.requirement_set.all %}
               	  <div class="alert alert-block" id="{{requirement.id}}" >
-              	  	  <h4 class="alert-heading">#{{problem.id}} - {{requirement.name}} ({{requirement.vote}})</h4>
+              	  	  <h4 class="alert-heading">#{{problem.id}} - {{requirement.name}}</h4>
               	  	  {% if requirement.user %}
               	  	  	<b>As a </b>{{requirement.user}}, <b>I want to</b> {{requirement.action}}. <b>So that</b> {{requirement.detail}}
               	  	  {% else %}
               	  	  	{{requirement.description}}
               	  	  {% endif %}
               	  	  <p>
+              	  	  	<span class="badge badge-inverse">{{requirement.vote}}</span>
               	  	  	<i class="icon-upload"></i><a class="btn-small" href="{% url url_requirement_more_priority requirement.id %}">up</a>
               	  	  	<i class="icon-download"></i><a class="btn-small" href="{% url url_requirement_less_priority requirement.id %}">down</a>
               	  	  </p>
@@ -101,11 +102,15 @@
               <div class="problem_div solution_div{{problem.id}}">
               	  {% for solution in problem.solution_set.all %}
               	  <div class="alert alert-info" id="{{solution.id}}" >
-              	  	  <h4 class="alert-heading">#{{problem.id}} - {{solution.name}} ({{solution.like}},{{solution.unlike}})</h4>
+              	  	  <h4 class="alert-heading">#{{problem.id}} - {{solution.name}}</h4>
               	  	  {{solution.description}}
               	  	  <p>
               	  	  	<a class="btn-small" href="{% url url_solution_detail solution.id %}">Attachments &raquo;</a>
               	  	  	<a class="btn-small" href="{% url url_register_attachment solution.id %}">New &raquo;</a>
+              	  	  	<span class="badge badge-inverse">{{solution.like}}</span>
+              	  	  	<i class="icon-thumbs-up"></i><a class="btn-small" href="{% url url_solution_like solution.id %}">like</a>
+              	  	  	<span class="badge badge-inverse">{{solution.unlike}}</span>
+              	  	  	<i class="icon-thumbs-down"></i><a class="btn-small" href="{% url url_solution_unlike solution.id %}">unlike</a>
               	  	  </p>
 		          </div>
               	  {% endfor %}

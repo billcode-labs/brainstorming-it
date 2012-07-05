@@ -134,3 +134,17 @@ def requirement_less_priority(request, id_requirement):
         requirement.vote -= 1
         requirement.save()
     return project_detail(request, requirement.problem.project.id)
+
+def solution_like(request, id_solution):
+    solution = get_object_or_404(Solution, pk=id_solution)
+    solution.like += 1
+    solution.save()
+    return project_detail(request, solution.problem.project.id)
+    
+def solution_unlike(request, id_solution):
+    solution = get_object_or_404(Solution, pk=id_solution)
+    solution.unlike += 1
+    solution.save()
+    return project_detail(request, solution.problem.project.id)
+    
+    

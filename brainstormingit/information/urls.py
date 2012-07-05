@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 from .views import ProjectsListView, project_detail, solution_detail, register_problem, register_requirement, register_solution, register_attachment
 from .views import problem_more_priority, problem_less_priority
 from .views import requirement_more_priority, requirement_less_priority
+from .views import solution_like, solution_unlike
 
 urlpatterns = patterns('information.views',
 
@@ -24,5 +25,7 @@ urlpatterns = patterns('information.views',
     #Solution
     url(r'^solution/new/(\d+)', register_solution, name='url_register_solution'),
     url(r'^attachment/new/(\d+)', register_attachment, name='url_register_attachment'),
+    url(r'^solution/like/(\d+)', solution_like, name='url_solution_like'),
+    url(r'^solution/unlike/(\d+)', solution_unlike, name='url_solution_unlike'),
     
 )
