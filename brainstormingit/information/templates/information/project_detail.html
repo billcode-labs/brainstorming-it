@@ -56,7 +56,7 @@
               <div class="problem_div requirement_div{{problem.id}}">
               	  {% for requirement in problem.requirement_set.all %}
               	  <div class="alert alert-block" id="{{requirement.id}}" >
-              	  	  <h4 class="alert-heading">#{{problem.id}} - {{requirement.name}}</h4>
+              	  	  <h4 class="alert-heading"><a href="{% url url_edit_requirement requirement.id %}">#{{requirement.id}}</a> - {{requirement.name}}</h4>
               	  	  {% if requirement.user %}
               	  	  	<b>As a </b>{{requirement.user}}, <b>I want to</b> {{requirement.action}}. <b>So that</b> {{requirement.detail}}
               	  	  {% else %}
@@ -93,7 +93,7 @@
               <div class="problem_div solution_div{{problem.id}}">
               	  {% for solution in problem.solution_set.all %}
               	  <div class="alert alert-success" id="{{solution.id}}" >
-              	  	  <h4 class="alert-heading">#{{problem.id}} - {{solution.name}}</h4>
+              	  	  <h4 class="alert-heading"><a href="{% url url_edit_solution solution.id %}">#{{solution.id}}</a> - {{solution.name}}</h4>
               	  	  {{solution.description}}
               	  	  <p>
               	  	  	<a class="btn-small" href="{% url url_solution_detail solution.id %}">Attachments &raquo;</a>

@@ -56,6 +56,22 @@ def register_requirement(request, id_project):
     payload = {'form':form, 'id_project': id_project }
     return render(request, 'information/register_requirement.html', payload)
 
+def edit_requirement(request, id_requirement):
+    requirement = get_object_or_404(Requirement, pk=id_requirement)
+    id_project = requirement.problem.project.id
+    
+    if request.POST:
+        form = RequirementForm(request.POST, instance=requirement)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/projects/' + str(id_project))
+    else:
+        form = RequirementForm(instance=requirement)
+        form.fields['vote'].widget = HiddenInput()
+            
+    payload = {'form':form, 'id_project': id_project }
+    return render(request, 'information/register_requirement.html', payload) 
+
 class RequirementForm(forms.ModelForm):
     class Meta:
         model = Requirement
@@ -82,6 +98,24 @@ def register_solution(request, id_project):
             
     payload = {'form':form, 'id_project': id_project }
     return render(request, 'information/register_solution.html', payload) 
+
+def edit_solution(request, id_solution):
+    solution = get_object_or_404(Solution, pk=id_solution)
+    id_project = solution.problem.project.id
+    
+    if request.POST:
+        form = SolutionForm(request.POST, instance=solution)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/projects/' + str(id_project))
+    else:
+        form = SolutionForm(instance=solution)
+        form.fields['like'].widget = HiddenInput()
+        form.fields['unlike'].widget = HiddenInput()
+            
+    payload = {'form':form, 'id_project': id_project }
+    return render(request, 'information/register_solution.html', payload) 
+
  
 
 def register_attachment(request, id_solution):
