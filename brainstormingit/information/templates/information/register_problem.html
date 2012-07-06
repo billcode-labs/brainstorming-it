@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block chamada %}Projetos{% endblock %}
+
+{% block corpo %}
+
+<section id="global">
+	
+	<div class="page-header">
+    	<h2>Problem</h2>
+	</div>
+	<form action="" method="post"> {% csrf_token %}
+		
+		<input type="hidden" name="id_project" value="{{id_project}}" />
+		
+			<div class="row">
+		       <div class="span12">
+		       	
+				{{ form }}
+			            		
+				</div>		
+			</div>
+			
+			<a href="{% url url_project_detail id_project %}" class="btn">Cancel</a>
+			<input type="submit" name="submit" class="btn btn-primary" value="Save changes" />
+	
+	</form>
+	
+</section>	
+
+
+{% endblock corpo %}
+
+{% block javascript %}
+{% endblock javascript %}

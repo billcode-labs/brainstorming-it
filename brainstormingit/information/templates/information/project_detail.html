@@ -22,7 +22,7 @@
              <h3>Problem's list</h3>
               {% for problem in project.problem_set.all %}
            	  <div class="alert alert-info problem_item" id="div{{problem.id}}" >
-               	  <h4 class="alert-heading">#{{problem.id}} - {{problem.name}}</h4>
+               	  <h4 class="alert-heading"><a href="{% url url_edit_problem problem.id %}">#{{problem.id}}</a> - {{problem.name}}</h4>
               	  	  <p>
               	  	  	<span class="badge badge-inverse">{{problem.vote}}</span>
               	  	  	<i class="icon-upload"></i><a class="btn-small" href="{% url url_problem_more_priority problem.id %}">up</a>

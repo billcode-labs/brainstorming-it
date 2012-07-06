@@ -181,4 +181,24 @@ def solution_unlike(request, id_solution):
     solution.save()
     return project_detail(request, solution.problem.project.id)
     
+
+def edit_problem(request, id_problem):
+    problem = get_object_or_404(Problem, pk=id_problem)
+    id_project = problem.project.id
     
+    if request.POST:
+        form = ProblemForm(request.POST, instance=problem)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/projects/' + str(id_project))
+    else:
+        form = ProblemForm(instance=problem)
+        form.fields['vote'].widget = HiddenInput()
+            
+    payload = {'form':form, 'id_project': id_project }
+    return render(request, 'information/register_problem.html', payload) 
+
+
+class ProblemForm(forms.ModelForm):
+    class Meta:
+        model = Problem

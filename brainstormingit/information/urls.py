@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 
-from .views import ProjectsListView, project_detail, solution_detail, register_problem, register_attachment
+from .views import ProjectsListView, project_detail, solution_detail, register_attachment
+from .views import register_problem, edit_problem
 from .views import register_requirement, edit_requirement
 from .views import register_solution, edit_solution
 from .views import problem_more_priority, problem_less_priority
@@ -16,6 +17,7 @@ urlpatterns = patterns('information.views',
     
     #Problem
     url(r'^problem/new/(\d+)', register_problem, name='url_register_problem'),
+    url(r'^problem/edit/(\d+)', edit_problem, name='url_edit_problem'),
     url(r'^problem/more_priority/(\d+)', problem_more_priority, name='url_problem_more_priority'),
     url(r'^problem/less_priority/(\d+)', problem_less_priority, name='url_problem_less_priority'),
     
