@@ -21,8 +21,8 @@
              -->
              <h3>Problem's list</h3>
               {% for problem in project.problem_set.all %}
-           	  <div class="alert alert-info problem_item" id="div{{problem.id}}" >
-               	  <h4 class="alert-heading"><a href="{% url url_edit_problem problem.id %}">#{{problem.id}}</a> - {{problem.name}}</h4>
+           	  <div class="alert alert-info problem_item div{{problem.id}}" id="{{problem.id}}" >
+               	  <h4 class="alert-heading"><a href="{% url url_edit_problem problem.id %}">{{problem.id}}</a> - {{problem.name}}</h4>
               	  	  <p>
               	  	  	<span class="badge badge-inverse">{{problem.vote}}</span>
               	  	  	<i class="icon-upload"></i><a class="btn-small" href="{% url url_problem_more_priority problem.id %}">up</a>
@@ -73,11 +73,11 @@
               </div>
               {% endfor %}
               <div>
-					<form action="{% url url_register_requirement id_project %}" method="post" id="add_requirement_form">
+					<form action="{% url url_register_requirement project.id %}" method="post" id="add_requirement_form">
 					   {% csrf_token %}
 		               <div class="input-append">
 		               	<input type="hidden" name="problem_id_input" id="problem_id_input" value="" />
-	                	<input type="text" name="requirement_name_input" class="span8" size="32" >
+	                	<input type="text" name="requirement_name_input" class="span8" value="{{project.id}}" size="32" >
 	                	<input type="submit" name="submit" value="Add" class="btn" />
 		               </div>
 					</form>
@@ -137,8 +137,8 @@
 					$(".problem_item").click(function(event){
 						var problem_id_selected = $(this).attr('id');
 						$(".problem_div").hide();
-						$(".requirement_" + problem_id_selected).show();
-						$(".solution_" + problem_id_selected).show();
+						$(".requirement_div" + problem_id_selected).show();
+						$(".solution_div" + problem_id_selected).show();
 						$("#problem_id_input").val(problem_id_selected);
 						$("#problem_id_input2").val(problem_id_selected);
 						$("#add_requirement_form").show();
